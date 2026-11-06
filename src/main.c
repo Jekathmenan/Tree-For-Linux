@@ -5,6 +5,17 @@
 int walk (const char* path, int intent);
 void print_file(const char* name, int is_dir, int indent);
 
+int main (int argc, char **argv) {
+        const char* path = ".";
+
+        if (argc > 1) {
+                path = argv[1];
+        }
+        print_file(path, 1, 0);
+        int err = walk(path, 2);
+
+        return err;
+}
 
 int walk (const char* path, int intent) {
         DIR *dir = opendir(path);
