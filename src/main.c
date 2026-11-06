@@ -11,7 +11,11 @@ int main (int argc, char **argv) {
         if (argc > 1) {
                 path = argv[1];
         }
+
+        // print top-dir
         print_file(path, 1, 0);
+
+        // walk dir
         int err = walk(path, 2);
 
         return err;
@@ -20,6 +24,7 @@ int main (int argc, char **argv) {
 int walk (const char* path, int intent) {
         DIR *dir = opendir(path);
 
+        // handle error opening file
         if (!dir) {
                 perror("Error opening path");
                 return 1;
@@ -29,7 +34,7 @@ int walk (const char* path, int intent) {
         while ((dp = readdir(dir)) != NULL) {
                 const char *name = dp->d_name;
 
-                // ignore files
+                // ignore files 
                 if (strcmp(name, ".") == 0 || strcmp(name, "..") == 0) {
                         continue;
                 }
@@ -44,6 +49,7 @@ int walk (const char* path, int intent) {
                         char sub_path[len];
                         snprintf(sub_path, len, "%s/%s", path, name);
 
+                        // recursive call to walk
                         walk(sub_path, intent + 2);
                 }
                 else {
@@ -52,6 +58,7 @@ int walk (const char* path, int intent) {
                 }
         }
 
+        // close dir
         closedir(dir);
 
         return 0;
