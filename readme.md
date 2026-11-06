@@ -17,13 +17,10 @@ Lists all files and subdirectories of a given directory in a tree-like format. I
 
 ## Roadmap
 
-- [ ]  Basic directory recursion
-
+- [X]  Basic directory recursion
 - [ ]  Pretty tree formatting
-
 - [ ]  Add depth limit (\`-L\`) flag
-
-- [ ]  Colored output
+- [X]  Colored output
 
 ## License
 
